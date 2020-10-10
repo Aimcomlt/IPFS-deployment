@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "An Ethereum Marketplace",
   "author": "gregory@dappuniversity.com",
-  "homepage": "https://your_github_aimcomlt.github.io/IPFS-deployment/",
+  "homepage": "https://aimcomlt.github.io/IPFS-deployment/",
   "dependencies": {
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
