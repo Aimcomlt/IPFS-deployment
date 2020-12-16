@@ -1,50 +1,50 @@
-import React, { Component } from 'react';
-import logo from '../logo.png';
-import './App.css';
+import React, { Component } from "react"
+import logo from "./logo.svg"
+import "./App.css"
+
+class LambdaDemo extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { loading: false, msg: null }
+  }
+
+  handleClick = api => e => {
+    e.preventDefault()
+
+    this.setState({ loading: true })
+    fetch("/.netlify/functions/" + api)
+      .then(response => response.json())
+      .then(json => this.setState({ loading: false, msg: json.msg }))
+  }
+
+  render() {
+    const { loading, msg } = this.state
+
+    return (
+      <p>
+        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
+        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
+        <br />
+        <span>{msg}</span>
+      </p>
+    )
+  }
+}
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-          <a
-            className="navbar-brand col-sm-3 col-md-2 mr-0"
-
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Dapp University
-          </a>
-        </nav>
-        <div className="container-fluid mt-5">
-          <div className="row">
-            <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={logo} className="App-logo" alt="logo" />
-                </a>
-                <h1>My IPFS Landing Page</h1>
-                <p>
-                  Edit <code>src/components/App.js</code> and save to reload.
-                </p>
-                <a
-                  className="App-link"
-
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LEARN BLOCKCHAIN <u><b>NOW! </b></u>
-                </a>
-              </div>
-            </main>
-          </div>
-        </div>
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <LambdaDemo />
+        </header>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
